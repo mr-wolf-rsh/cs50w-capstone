@@ -1,4 +1,4 @@
-# Voter Aid
+# [Voter Aid](https://github.com/mr-wolf-rsh/cs50w-capstone/)
 
 Hello world! I'd like to introduce you to my final project for [CS50 Web Programming with Python and JavaScript course](https://cs50.harvard.edu/web/2020/).
 I call it **Voter Aid** and it's a mobile-responsive web application developed in Django (Python) and React (Javascript).
@@ -6,6 +6,10 @@ I call it **Voter Aid** and it's a mobile-responsive web application developed i
 You can [click here](https://youtu.be/25ysHddm28Q/) to check it up:
 
 [![Voter Aid](voter_aid.gif)](https://youtu.be/25ysHddm28Q/)
+
+This is [Capstone](https://github.com/mr-wolf-rsh/cs50w-capstone/), which is one of [CS50W projects](https://cs50.harvard.edu/web/2020/projects/).
+
+Check up the rest of them! - [Projects for CS50W](https://github.com/stars/mr-wolf-rsh/lists/cs50w/)
 
 ## What exactly is Voter Aid?
 
