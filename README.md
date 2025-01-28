@@ -3,7 +3,7 @@
 Hello world! I'd like to introduce you to my final project for [CS50 Web Programming with Python and JavaScript course](https://cs50.harvard.edu/web/2020/).
 I call it **Voter Aid** and it's a mobile-responsive web application developed in Django (Python) and React (Javascript).
 
-You can [click here](https://youtu.be/25ysHddm28Q/) to check it up:
+You can [click here](https://youtu.be/25ysHddm28Q/) for watching the demo.
 
 [![Voter Aid](voter_aid.gif)](https://youtu.be/25ysHddm28Q/)
 
