@@ -1,0 +1,89 @@
+version: "3.9"
+
+services:
+  db:
+    restart: unless-stopped
+    image: postgres:15.3-alpine
+    container_name: db
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "123"
+      POSTGRES_DB: "voteraid_db"
+      PGDATA: /var/lib/postgresql/data/pgdata
+  pgadmin:
+    restart: unless-stopped
+    image: dpage/pgadmin4:7.5
+    container_name: pgadmin
+    volumes:
+      - ./pgadmin/servers.json:/pgadmin4/servers.json
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "5051:80"
+    expose:
+      - "5051"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@rash.com"
+      PGADMIN_DEFAULT_PASSWORD: "123"
+      PGADMIN_LISTEN_PORT: 80
+    depends_on:
+      - db
+  backend:
+    restart: unless-stopped
+    build: ./backend
+    container_name: backend
+    volumes:
+      - ./backend:/app/backend
+      - backend-migrations:/app/backend/voteraid/migrations
+      - backend-files:/app/backend/files
+    ports:
+      - "8000:8000"
+    expose:
+      - "8000"
+    environment:
+      PIP_DISABLE_PIP_VERSION_CHECK: 1
+      PYTHONDONTWRITEBYTECODE: 1
+      PYTHONUNBUFFERED: 1
+      DEBUG: 1
+      DJANGO_SECRET_KEY: "HXxG4Mq4"
+      DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1"
+      DJANGO_SUPERUSER_EMAIL: "admin@rash.com"
+      DJANGO_SUPERUSER_PASSWORD: "123"
+      DJANGO_PASSWORD_VALIDATORS: "UserAttributeSimilarity"
+      DB_ENGINE: "postgresql"
+      DEFAULT_DB_NAME: "postgres"
+      DB_NAME: "voteraid_db"
+      DB_USER: "admin"
+      DB_PASSWORD: "123"
+      DB_HOST: "db"
+      DB_PORT: 5432
+    depends_on:
+      - db
+  frontend:
+    restart: unless-stopped
+    build: ./frontend
+    container_name: frontend
+    command: "npm start"
+    volumes:
+      - ./frontend:/app/frontend
+      - frontend-node-modules:/app/frontend/node_modules
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    environment:
+      NODE_ENV: "development"
+      CHOKIDAR_USEPOLLING: "true"
+      REACT_APP_DEFAULT_USER_COLOR: "#36AA7B"
+
+volumes:
+  postgres-db:
+  pgadmin-data:
+  backend-migrations:
+  backend-files:
+  frontend-node-modules:

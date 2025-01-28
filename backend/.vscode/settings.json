@@ -1,0 +1,8 @@
+{
+    "python.defaultInterpreterPath": "/usr/local/bin/python",
+    "python.analysis.disabled": [
+        "unresolved-import",
+        "undefined-variable"
+    ],
+    "python.analysis.typeCheckingMode": "off"
+}
